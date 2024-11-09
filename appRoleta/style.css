@@ -21,7 +21,7 @@ body{
 
 .roleta {
     margin-top: 20px;
-    margin-left: 35vw;
+    margin-left: 20vw;
     border: 10px solid #FFFFFF;
     position: relative;
     width: 600px;
@@ -33,7 +33,7 @@ body{
 
 .seta {
     margin-top: 20px;
-    margin-left: 35vw;
+    margin-left: 20vw;
     position: absolute;
     left: 48.5%;
     border-bottom: 0px solid transparent;
@@ -222,7 +222,7 @@ body{
 }
 
 #codigoInput {
-    margin-left: 72vw;
+    margin-left: 50vw;
     padding: 15px;
     border: none;
     border-radius: 10px;
