@@ -321,23 +321,3 @@ body{
         margin-left: 100px;
     }
 }
-/* Responsividade para tablets */
-@media screen and (max-width: 1024px) {
-    .roleta {
-        margin-left: 20px;
-        width: 600px;
-        height: 600px;
-    }
-    .seta {
-        margin-left: 20px;
-    }
-    .area {
-        position: relative;
-        width: 600px;
-        height: 600px;
-        margin-top: 0px;
-    }
-    #codigoInput{
-        margin-left: 100px;
-    }
-}
