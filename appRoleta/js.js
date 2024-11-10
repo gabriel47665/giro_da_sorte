@@ -1,9 +1,9 @@
 // Configuração das probabilidades para cada prêmio (soma das probabilidades deve ser 1)
 const premios = [
   { nome: "Kit Doce", probabilidade: 0.15 },
-  { nome: "Gire novamente", probabilidade: 0.15 },
+  { nome: "Gire novamente", probabilidade: 0.1 },
   { nome: "+2 Pontos", probabilidade: 0.1 },
-  { nome: "+3 Pontos", probabilidade: 0.05 },
+  { nome: "+3 Pontos", probabilidade: 0.1 },
   { nome: "+1 Ponto", probabilidade: 0.15 },
   { nome: "Kit Doce", probabilidade: 0.15 },
   { nome: "+2 Pontos", probabilidade: 0.1 },
