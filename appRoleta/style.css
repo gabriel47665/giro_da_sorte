@@ -154,7 +154,7 @@ body{
 
 .genero4 {
     top: 33%;
-    left: 76%;
+    left: 70%;
     transform: rotate(150deg);
 }
 
@@ -178,7 +178,7 @@ body{
 
 
 .genero8{
-    top: 60%;
+    top: 58%;
     left: 10%;
     transform: rotate(-8deg);
 }
@@ -246,6 +246,7 @@ body{
 }
 
 #vldBtn {
+    margin-left: 41vw;
     display: flex;
     align-items: center;
     justify-content: center;
