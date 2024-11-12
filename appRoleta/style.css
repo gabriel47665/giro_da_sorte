@@ -247,6 +247,8 @@ body{
 
 #vldBtn {
     margin-left: 41vw;
+    margin-top: 30px;
+    margin-bottom: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -255,7 +257,7 @@ body{
     border-radius: 10px;
     background-color: #ff0015;
     color: white;
-    font-size: 18px;
+    font-size: 40px;
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     transition: 0.3s;

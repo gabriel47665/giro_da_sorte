@@ -12,39 +12,39 @@ const premios = [
 
 // Função para selecionar o prêmio com base nas probabilidades
 function selecionarPremio() {
-  const randomNum = Math.random(); // Gera um número entre 0 e 1
+  const randomNum = Math.random();
   let acumulador = 0;
 
   for (let i = 0; i < premios.length; i++) {
     acumulador += premios[i].probabilidade;
     if (randomNum <= acumulador) {
-      return i; // Retorna o índice do prêmio selecionado
+      return i;
     }
   }
-  return premios.length - 1; // Retorna o último prêmio, caso algo dê errado
+  return premios.length - 1;
 }
 
 // Função para girar a roleta com o tempo específico e parar no prêmio correto
 function girarRoleta(tempoGiro, premio) {
-  const globalObjects = {
-    btJogar: document.getElementById("btJogar"),
-    roleta: document.getElementById("roleta"),
-    btParar: document.getElementById("btParar")
-  };
-
-  globalObjects.btJogar.style.visibility = "hidden";
-  globalObjects.btParar.style.visibility = "visible";
-
+  const roleta = document.getElementById("roleta");
   const anguloPorPremio = 360 / premios.length;
   const anguloParada = anguloPorPremio * premio + anguloPorPremio / 2;
   const rotacoesCompletas = 4;
   const anguloFinal = 360 * rotacoesCompletas + anguloParada;
+  const globalObjects = {
+    btJogar: document.getElementById("btJogar"),
+    btParar: document.getElementById("btParar")
+  };
+  
+  globalObjects.btJogar.style.visibility = "hidden";
+  globalObjects.btParar.style.visibility = "visible";
 
-  globalObjects.roleta.style.transition = `transform ${tempoGiro}s linear`;
-  globalObjects.roleta.style.transform = `rotate(${anguloFinal}deg)`;
+  roleta.style.transition = `transform ${tempoGiro}s linear`;
+  roleta.style.transform = `rotate(${anguloFinal}deg)`;
 
   setTimeout(() => {
     abrirModal(premio);
+    desbloquearBotao();
     globalObjects.btJogar.style.visibility = "visible";
     globalObjects.btParar.style.visibility = "hidden";
   }, tempoGiro * 1000);
@@ -52,50 +52,61 @@ function girarRoleta(tempoGiro, premio) {
 
 // Função para iniciar o giro da roleta
 function iniciarGiro() {
-  const premioSelecionado = selecionarPremio(); // Seleciona o prêmio aleatoriamente
-  const tempoGiro = 5; // Tempo de rotação em segundos
+  const premioSelecionado = selecionarPremio();
+  const tempoGiro = 5;
   girarRoleta(tempoGiro, premioSelecionado);
-  bloquearBotao();
+  bloquearBotao()
 }
-
 
 // Função para abrir o modal com o prêmio correspondente
 function abrirModal(premio) {
   const mensagem = premios[premio].nome === "Gire novamente"
     ? "Não foi dessa vez... Gire novamente!"
     : `Parabéns! Você ganhou: ${premios[premio].nome}`;
-    
+
   document.getElementById("tituloModal").innerText = mensagem;
   $("#ex1").modal("show");
 }
 
-
-// Função para bloquear o botão e exibir contagem regressiva
+// Função para bloquear o botão e exibir "Girando" durante a rotação
 function bloquearBotao() {
   const botao = document.getElementById("vldBtn");
-  let tempoRestante = 20;
-
   botao.disabled = true;
-  botao.innerText = `Aguarde ${tempoRestante}`;
-
-  const intervalo = setInterval(() => {
-    tempoRestante--;
-    botao.innerText = `Aguarde ${tempoRestante}`;
-
-    if (tempoRestante === 0) {
-      clearInterval(intervalo);
-      botao.disabled = false;
-      botao.innerText = "Clique aqui para girar!";
-      resetarPagina();
-    }
-  }, 1000);
+  botao.innerText = "Girando...";
 }
 
-// Função para resetar a página
-function resetarPagina() {
-  const globalObjects = {
-    roleta: document.getElementById("roleta")
+// Função para desbloquear o botão e permitir uma nova tentativa
+function desbloquearBotao() {
+  const botao = document.getElementById("vldBtn");
+  botao.disabled = false;
+  botao.innerText = "Nova Tentativa";
+
+  // Atualiza o evento de clique para o novo estado do botão
+  botao.onclick = function() {
+    if (botao.innerText === "Nova Tentativa") {
+      resetarPagina();
+      botao.innerText = "Clique para girar!";
+    } else {
+      bloquearBotao();
+      iniciarGiro();
+    }
   };
-  globalObjects.roleta.style.transition = "";
-  globalObjects.roleta.style.transform = "rotate(0deg)";
+}
+
+// Função para resetar a página e o estado da roleta
+function resetarPagina() {
+  const roleta = document.getElementById("roleta");
+  roleta.style.transition = "";
+  roleta.style.transform = "rotate(0deg)";
+}
+
+// Configura o evento de clique inicial do botão
+document.getElementById("vldBtn").onclick = function() {
+  bloquearBotao();  // Bloqueia o botão e mostra "Girando..."
+  iniciarGiro();    // Inicia o giro da roleta
+};
+
+function simularClique() {
+  // Simula o clique no botão vldBtn
+  document.getElementById("vldBtn").click();
 }
