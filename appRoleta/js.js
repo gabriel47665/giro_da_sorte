@@ -85,7 +85,7 @@ function desbloquearBotao() {
   botao.onclick = function() {
     if (botao.innerText === "Nova Tentativa") {
       resetarPagina();
-      botao.innerText = "Clique para girar!";
+      setTimeout(iniciarGiro, 10)
     } else {
       bloquearBotao();
       iniciarGiro();
